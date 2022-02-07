@@ -8,7 +8,7 @@ The main module that I used to write this program is [itertools](https://docs.py
 3. Enter words amount (for example 2)
 4. Enter the words one at a time in each line
 5. When the process ends, in the file ```rawdata.txt``` all possible combinations will be recorded.
-> Note: they will be saves in ```rawdata.txt``` as
+> Note: they will be saved in ```rawdata.txt``` as
 > ('word1')
 > ('word2')
 > ('word1', 'word2')
