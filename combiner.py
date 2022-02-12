@@ -1,26 +1,28 @@
 # Combiner
-# Void 1.0
+# Void 1.1
 # author : @notforunder
 
 import sys
 from itertools import *
 import __main__ as m
 import void_colorized
+import time
 
 bc = void_colorized.Color
 
 
-def contscript():
-    print("Want to continue?")
+def continue_script():
+    time.sleep(1)
+    print("\nWant to continue?")
     choice = input("[Y/N]\n>>")
-    if choice == "Y":
-        m.menu()
-    elif choice == "N":
+    if choice == "Y" or choice == "y":
+        m.main()
+    elif choice == "N" or choice == "n":
         print("Ending...")
         sys.exit()
     else:
         print(bc.WARNING + "Wrong option" + bc.ENDC)
-        contscript()
+        continue_script()
 
 
 def permutationprocess():
@@ -41,12 +43,10 @@ def permutationprocess():
     max_list = 1 + input_num
 
     # PERMUTATION MAIN PROCESS
-    print(bc.OKGREEN + "\nSuccessfully complete. Raw output saved to rawdata.txt")
-    print(bc.WARNING + "Run main.py again and use option [2] from menu to format data!!!" + bc.ENDC)
-    sys.stdout = open("rawdata.txt", "w")
-    for min_list in range(max_list):
-        for i in permutations(keywords_list, min_list):
-            print(i, end='\n')
-    sys.stdout.close()
+    print(bc.OKGREEN + "\nSuccessfully complete. Raw output saved to rawdata.txt" + bc.ENDC)
+    with open("rawdata.txt", "w") as textfile:
+        for min_list in range(max_list):
+            for i in permutations(keywords_list, min_list):
+                textfile.write(' '.join(str(s) for s in i) + '\n')
 
-
+    continue_script()
