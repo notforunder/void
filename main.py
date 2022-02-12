@@ -1,11 +1,11 @@
 # Keywords combiner
-# Void 1.0
+# Void 1.1
 # author : @notforunder
 
 import sys
 import void_colorized
 import combiner
-import formater
+import reader as r
 
 bc = void_colorized.Color
 
@@ -25,26 +25,36 @@ def banner_print():
           "     ░                 ░      \n" + bc.ENDC)
 
 
+def choices():
+    choice = input("\nEnter option [1-Q]\n>>")
+    if choice == "1":
+        print(bc.WARNING + "Running combiner..." + bc.ENDC)
+        combiner.permutationprocess()
+    elif choice == "2":
+        print(bc.WARNING + "Running reader..." + bc.ENDC)
+        r.read_file()
+    elif choice == "Q" or choice == "q":
+        print(bc.FAIL + "Closing..." + bc.ENDC)
+        sys.exit()
+    else:
+        print(bc.WARNING + "Wrong option. Try again..." + bc.ENDC)
+        return choices()
+
+
 def menu():
-    banner_print()
     print("Welcome to the Void Word Combiner\n            by " + bc.WARNING + bc.BOLD + "notforunder" + bc.ENDC)
-    print("         Current version: " + bc.OKGREEN + bc.BOLD + "1.0" + bc.ENDC)
+    print("         Current version: " + bc.OKGREEN + bc.BOLD + "1.1" + bc.ENDC)
     print("\n[MENU]")
     print(bc.GREEN + "[1]" + bc.ENDC + " Start combining")
-    print(bc.GREEN + "[2]" + bc.ENDC + " Format raw data")
+    print(bc.GREEN + "[2]" + bc.ENDC + " Read rawdata.txt")
     print(bc.RED + "[Q]" + bc.ENDC + " Quit")
+    choices()
 
 
-menu()
-choice = input("\nEnter option [1-Q]\n>>")
-if choice == "1":
-    print(bc.WARNING + "Running combiner..." + bc.ENDC)
-    combiner.permutationprocess()
-elif choice == "2":
-    print(bc.WARNING + "Running formatter..." + bc.ENDC)
-    formater.format()
-elif choice == "Q":
-    print(bc.FAIL + "Closing..." + bc.ENDC)
-    sys.exit()
-else:
-    print(bc.WARNING + "Wrong option. Try again..." + bc.ENDC)
+def main():
+    banner_print()
+    menu()
+
+
+if __name__ == "__main__":
+    main()
