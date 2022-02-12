@@ -8,12 +8,13 @@ The main module that I used to write this program is [itertools](https://docs.py
 3. Enter words amount (for example 2)
 4. Enter the words one at a time in each line
 5. When the process ends, in the file ```rawdata.txt``` all possible combinations will be recorded.
-> Note: they will be saved in ```rawdata.txt``` as
-> ('word1')
-> ('word2')
-> ('word1', 'word2')
-> ('word2', 'word1')
-> So if you need clean output that will only include the words - run the program again and select the second option from the menu
  
+## Version
+
+### 1.1
+1. Removed formater.py
+2. Added reader.py
+3. Improved usage
+
 ## Installation
 ```git clone https://github.com/notforunder/void```
