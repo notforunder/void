@@ -1,60 +1,30 @@
-# Keywords combiner
-# Void 1.1
-# author : @notforunder
-
 import sys
-import void_colorized
-import combiner
-import reader as r
+from itertools import *
 
-bc = void_colorized.Color
+class Combiner():
+    def __init__(self, input_file, output_file):
+        self.input_file = input_file
+        self.output_file = output_file
 
+    def read_file(self):
+        with open(self.input_file, 'r') as f:
+            return f.read().splitlines()
 
-# BANNER PRINT
-def banner_print():
-    print(bc.RED +
-          "\n ██▒   █▓ ▒█████   ██▓▓█████▄ \n"
-          "▓██░   █▒▒██▒  ██▒▓██▒▒██▀ ██▌\n"
-          " ▓██  █▒░▒██░  ██▒▒██▒░██   █▌\n"
-          "  ▒██ █░░▒██   ██░░██░░▓█▄   ▌\n"
-          "   ▒▀█░  ░ ████▓▒░░██░░▒████▓ \n"
-          "   ░ ▐░  ░ ▒░▒░▒░ ░▓   ▒▒▓  ▒\n"
-          "   ░ ░░    ░ ▒ ▒░  ▒ ░ ░ ▒  ▒\n"
-          "     ░░  ░ ░ ░ ▒   ▒ ░ ░ ░  ░\n"
-          "      ░      ░ ░   ░     ░   \n"
-          "     ░                 ░      \n" + bc.ENDC)
-
-
-def choices():
-    choice = input("\nEnter option [1-Q]\n>>")
-    if choice == "1":
-        print(bc.WARNING + "Running combiner..." + bc.ENDC)
-        combiner.permutationprocess()
-    elif choice == "2":
-        print(bc.WARNING + "Running reader..." + bc.ENDC)
-        r.read_file()
-    elif choice == "Q" or choice == "q":
-        print(bc.FAIL + "Closing..." + bc.ENDC)
-        sys.exit()
-    else:
-        print(bc.WARNING + "Wrong option. Try again..." + bc.ENDC)
-        return choices()
-
-
-def menu():
-    print("Welcome to the Void Word Combiner\n            by " + bc.WARNING + bc.BOLD + "notforunder" + bc.ENDC)
-    print("         Current version: " + bc.OKGREEN + bc.BOLD + "1.1" + bc.ENDC)
-    print("\n[MENU]")
-    print(bc.GREEN + "[1]" + bc.ENDC + " Start combining")
-    print(bc.GREEN + "[2]" + bc.ENDC + " Read rawdata.txt")
-    print(bc.RED + "[Q]" + bc.ENDC + " Quit")
-    choices()
+    def combine(self):
+        collected_lines = self.read_file()
+        collected_lines_length = len(collected_lines)
+        max = 1 + collected_lines_length
+        with open(self.output_file, 'w') as f:
+            for min in range(max):
+                for i in permutations(collected_lines, min):
+                    f.write(' '.join(str(s) for s in i) + '\n')
+        print("Successfully combined")
 
 
 def main():
-    banner_print()
-    menu()
+    combiner = Combiner(sys.argv[1], sys.argv[2])
+    combiner.combine()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
