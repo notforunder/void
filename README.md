@@ -9,3 +9,4 @@ NOTE: In input file put words for each line
 
 ## Installation
 ```git clone https://github.com/notforunder/void```
+```python3 -m pip install -r requirements.txt```
